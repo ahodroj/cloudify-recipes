@@ -1,43 +1,36 @@
-# Pet Clinic 
+# Mongo HA
 
 **Status**: Tested  
-**Description**: Pet Clinic  
+**Description**: MongoDB Highly Available Sharded/Replicated Cluster  
 **Maintainer**:       Cloudify  
 **Maintainer email**: cloudifysource@gigaspaces.com  
-**Contributors**:    [tamirko](https://github.com/tamirko)  
+**Contributors**:    [ahodroj](https://github.com/ahodroj)  
 **Homepage**:   [http://www.cloudifysource.org](http://www.cloudifysource.org)  
 **License**:      Apache 2.0   
 **Build**: http://repository.cloudifysource.org/org/cloudifysource/2.1.1/gigaspaces-cloudify-2.1.1-ga-b1396-361.zip  
 **Linux* sudoer permissions**:	Not required  
 **Windows* Admin permissions**:  Required on Windows 7    
-**Release Date**: July 1st 2012  
+**Release Date**: March 18th 2013  
 
 
 Tested on:
 --------
 
-* <strong>localCloud</strong>: Windows 7 and CentOs 
-* <strong>EC2</strong>: Ubuntu and CentOs 
-* <strong>OpenStack</strong>: CentOs 
-* <strong>Rackspace</strong>: CentOs 
+* <strong>localCloud</strong>: Windows 7
+* <strong>EC2</strong>: CentOs 
 
-We disable the requiretty flag in /etc/sudoers on the installed VMs, so that Cloudify will be able to invoke remote ssh commands as a sudoer. This feature will be a part of Cloudify in the near future.
-Until then, please use the [Cloud Drivers Repository](https://github.com/CloudifySource/cloudify-cloud-drivers).
+
 
 
 Synopsis
 --------
 
-This folder contains a service recipe for the Pet Clinic application.
+This folder contains a service recipe for a multi-zone MongoDB cluster.
 
-The PetClinic application is a port of the Spring PetClinic application to Grails and MongoDB. It uses the Grails GORM bindings to MongoDB. 
-The users of the application are employees of the clinic who, in the course of their work, need to view and manage information regarding veterinarians, the clients, and their pets.
+The MongoHA application is an example of a typical production deployment of MongoDB in a cloud environment whereas the replica sets are deployed
+across multiple availability zones. This tolerates up to two zone failures to keep the shards running. 
 
-This recipe is comprised of five services:
-* [mongod](../../services/mongodb/mongod/README.md)  
-* [mongos](../../services/mongodb/mongos/README.md)  
-* [mongoConfig](../../services/mongodb/mongoConfig/README.md)  
-* [tomcat](../../services/tomcat/README.md) 
-* [apacheLB](../../services/apacheLB/README.md) 
+ 
+
 
 
