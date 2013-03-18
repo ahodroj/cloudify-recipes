@@ -14,6 +14,9 @@
 * limitations under the License.
 *******************************************************************************/
 import java.util.concurrent.TimeUnit
+
+import javax.security.auth.login.Configuration.ConfigDelegate;
+
 import org.cloudifysource.dsl.context.ServiceContextFactory
 
 config = new ConfigSlurper().parse(new File("cassandra.properties").toURL())
@@ -22,6 +25,18 @@ serviceContext = ServiceContextFactory.getServiceContext()
 home = "${serviceContext.serviceDirectory}/${config.unzipFolder}"
 instanceID = serviceContext.getInstanceId()
 installDir = System.properties["user.home"]+ "/.cloudify/${config.serviceName}" + instanceID
+
+
+// Calculate ring token
+//tokens = []
+//for (int i in 0..config.nodeCount-1) {    
+  // token_range = (i*(2**127))/nodes, but no no no, we give you...
+//  BigInteger token_range = new BigInteger(2).pow(127).divide(new BigInteger(nodeCount)).multiply(new BigInteger(i))
+// tokens << token_range.to_s
+//}
+
+//serviceContext.attributes.thisInstance["intial_token"] = tokens[instanceID - 1]
+
 
 new AntBuilder().sequential {
 	mkdir(dir:installDir)

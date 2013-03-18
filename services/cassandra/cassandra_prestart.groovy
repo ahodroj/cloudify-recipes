@@ -37,15 +37,29 @@ try {
   instanceID = serviceContext.getInstanceId()
   installDir = System.properties["user.home"]+ "/.cloudify/${config.serviceName}" + instanceID
   home = "${serviceContext.serviceDirectory}/${config.unzipFolder}"
-  conf = "${home}/conf"
+  //token = serviceContext.attributes.thisInstance["initial_token"]
+  
+  // First machine to start will become the seed for the cluster
+  //seed = serviceContext.attributes.thisApplication["seed"]
+  //if(seed == null) {
+//	  serviceContext.attributes.thisApplication["seed"] = ip
+//	  seed = ip
+//  }
+    conf = "${home}/conf"
 	yaml = new File("${conf}/cassandra.yaml")
 	println "cassandra yaml location: " + yaml.getAbsolutePath()
 	yamltext = yaml.text
 	backup = new File("${conf}/cassandra.yaml_bak")
 	backup.write yamltext
 	yamltext = yamltext.replaceAll("- 127.0.0.1\n", agentlist)
+	// seeds: "127.0.0.1"
+//	yamltext = yamltext.replaceAll("seeds: \"127.0.0.1\"", "seeds: \"" + seed + "\"")
 	yamltext = yamltext.replaceAll("listen_address: localhost", "listen_address: " + ip)
+	yamltext = yamltext.replaceAll("listen_address: localhost", "listen_address: " + ip)
+//	yamltext = yamltext.replaceAll("initial_token:", "initial_token: " + token)
 	yamltext = yamltext.replaceAll("rpc_address: localhost", "rpc_address: 0.0.0.0")
+	yamltext = yamltext.replaceAll("endpoint_snitch: org.apache.cassandra.locator.SimpleSnitch", 
+								   "endpoint_snitch: org.apache.cassandra.locator.PropertyFileSnitch")
 	yamltext = yamltext.replaceAll("/var/lib/cassandra/data", "../lib/cassandra/data")
 	yamltext = yamltext.replaceAll("/var/lib/cassandra/commitlog", "../lib/cassandra/commitlog")
 	yamltext = yamltext.replaceAll("/var/lib/cassandra/saved_caches", "../lib/cassandra/saved_caches")
