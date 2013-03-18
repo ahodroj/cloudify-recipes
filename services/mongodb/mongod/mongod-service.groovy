@@ -20,6 +20,15 @@ service {
 		startDetection {
 			ServiceUtils.isPortOccupied(context.attributes.thisInstance["port"])
 		}
+		
+		stopDetection {
+			!ServiceUtils.isPortOccupied(context.attributes.thisInstance["port"])
+		}
+		
+		details {
+			
+			return ["mongoPort" : context.attributes.thisInstance["port"], "replicaSet" : context.attributes.thisInstance["replicaSet"]]
+		}
 
 		monitors{
 			try { 

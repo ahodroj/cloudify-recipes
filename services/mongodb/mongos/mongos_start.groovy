@@ -38,6 +38,7 @@ new AntBuilder().exec(executable:"${script}") {
 	arg line:"--configdb ${configdb}"
 	arg line:"--port ${currPort}"
 	arg line:"--chunkSize 1"
+	
 }
 
 println "mongos_start.groovy: Script ${script} ended for mongos#${instanceID}"

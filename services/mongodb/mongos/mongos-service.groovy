@@ -25,7 +25,7 @@ service {
 			try { 
 				port  = context.attributes.thisInstance["port"] as int
 				mongo = new Mongo("127.0.0.1", port)			
-				db = mongo.getDB("mydb")
+				db = mongo.getDB("admin")
 														
 				result = db.command("serverStatus")
 				println "mongod-service.groovy: result is ${result}"	
